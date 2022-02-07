@@ -1,0 +1,61 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r}
+library(tidyverse)
+library(GGally)
+```
+
+
+
+“I want to make a scatterplot for every pair of variables”
+
+
+```{r echo=FALSE, message=FALSE, results='hide'}
+mpg %>% 
+  select_if(is.numeric) %>% 
+  ggpairs()
+```
+
+
+
+“I want to create an index column by group”
+
+
+```{r}
+mpg %>% 
+  group_by(manufacturer) %>% 
+  mutate(index = row_number()) %>% 
+  head()
+```
+
+
+“I want to create a lagged variable”
+
+
+```{r}
+shampoo <- read_csv('https://raw.githubusercontent.com/jbrownlee/Datasets/master/shampoo.csv')
+
+shampoo %>% 
+  mutate(sales_lagged = lag(Sales)) %>% 
+  head()
+```
+
+
+“I want to know what percent of each column are missing values”
+
+
+```{r}
+library(palmerpenguins)
+colMeans(is.na(penguins))
+```
+
+“I want to pick a row at random from my (potentially) very large dataset”
+
+
+```{r}
+sample_n(mpg, 1)
+``` 
