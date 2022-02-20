@@ -1,0 +1,224 @@
+---
+title: "DataBaseball"
+output:
+  html_document:
+    df_print: paged
+  html_notebook: default
+  pdf_document: default
+---
+
+# On deck: Import the packages we'll need
+
+"There's a package for that!"
+
+```{r}
+library(Lahman) # Our source data
+library(tidyverse)  # "Metapackage," don't leave home without it!
+library(psych)  # Descriptive stats
+library(skimr)  # Data profiling
+library(writexl) # Write to Excel -- data dump
+library(openxlsx) # Write to Excel -- plus 
+```
+
+# 1st base: Import the data
+
+We can pull this data from the `Teams` and `Salary` tables of `Lahman`
+
+```{r}
+head(Teams)
+head(Salaries)
+```
+
+Drop some of these Teams columns
+
+
+```{r}
+teams <- Teams %>% 
+  select(yearID, teamID, name, attendance, W)
+
+head(teams)
+```
+
+
+
+We would like to pull the payroll data from `Salaries` and merge it to the data in `Teams`. 
+
+`Salaries` is at the *player* level so we will *aggregate* it, then merge. _Think `VLOOKUP()`!_
+
+```{r}
+
+# Get the total annual salaries by team
+payroll <- Salaries %>% 
+  group_by(yearID, teamID) %>% 
+  summarise(payroll = sum(salary))
+
+head(payroll)
+
+```
+
+
+Now let's merge this into our `Teams` table:
+
+```{r}
+
+min(Teams$yearID)
+min(payroll$yearID)
+
+
+# Drop the years that don't have payroll data
+teams_merged <- teams %>% 
+  inner_join(payroll)
+
+
+head(teams_merged)
+
+```
+
+
+
+Sanity check -- does the total payroll equal sum of salaries?
+
+
+```{r}
+
+sum(teams_merged$payroll) == sum(Salaries$salary)
+
+```
+
+# 2nd base: Profile the data
+
+Lots of ways to profile the data... 
+
+```{r}
+
+# Shape
+dim(teams_merged)
+
+# Summary statistics
+summary(teams_merged)
+
+```
+
+Many packages exist to aid in the exploration:
+
+```{r}
+skim(teams_merged)
+```
+
+
+```{r}
+describe(teams_merged)
+```
+
+
+## Shortstop: Data visualization?
+
+This is an easy step to overlook, but it is _crucial_! It leads very well into modeling. 
+
+
+```{r}
+# Distribution of payrolls
+ggplot(data = teams_merged, aes(x = payroll)) +
+  geom_histogram()
+
+# What could be causing this?
+```
+
+
+
+
+```{r}
+# Distribution of wins
+ggplot(data = teams_merged, aes(x = W)) +
+  geom_histogram()
+```
+
+
+
+
+# 3rd base: Analyze the data
+
+Depending how statistically informed you want to get, R can "probably" handle it! Let's see what our payroll report might have in store... 
+
+
+```{r}
+# Relationship between payroll and attendance
+ggplot(data = teams_merged, aes(x = payroll, y = attendance)) +
+  geom_point()
+```
+
+
+```{r}
+# Relationship between payroll and wins
+ggplot(data = teams_merged, aes(x = payroll, y = W)) +
+  geom_point()
+```
+
+```{r}
+# What if we take the log of payrolls?
+teams_merged$log_payroll <- log(teams_merged$payroll)
+head(teams_merged)
+```
+
+
+```{r}
+# Relationship between payroll and attendance
+ggplot(data = teams_merged, aes(x = log_payroll, y = attendance)) +
+  geom_point() +
+  geom_smooth(method = 'lm')
+```
+
+You'd want to back this up with more diagnostics, but you get the idea... 
+
+
+
+# Home: Export to Excel
+
+There's definitely more that could be done with our payroll/attendnance analysis, but let's take our victory lap now :) 
+
+
+If you want a pure data dump to Excel, `writexl` is a good option:
+
+
+```{r}
+# What do you want to write, and to where?
+write_xlsx(teams_merged, 'output/writexl.xlsx')
+```
+
+
+```{r}
+# What can this function do and not?
+# Awesome Easter Egg
+?write_xlsx
+```
+
+If you would like to fully automate the production from R, `openxlsx` is a good option: 
+
+```{r}
+# Add workbook
+wb <- createWorkbook()
+
+# Add worksheet of raw data
+data_sheet <- addWorksheet(wb, sheetName = 'data')
+
+# Write the dataset as a Table to Excel
+writeDataTable(wb, sheet = data_sheet, x = teams_merged, rowNames = FALSE)
+
+
+# Send plot to the workbook
+ggplot(data = teams_merged, aes(x = payroll, y = attendance)) +
+  geom_point() + 
+  ggtitle('Payroll vs attendance')
+
+# Add the image to the worksheet, set the placement
+insertPlot(wb, sheet = data_sheet, startRow = 1, startCol = "I", width = 6, height = 4)
+
+file = 'output/openxlsx.xlsx'
+
+# save workbook to working directory
+saveWorkbook(wb = wb, file = file, overwrite = TRUE)
+```
+
+We could even add cell formats, conditional formatting and so forth to Excel from R using this package. **Home run!**
+
+Back to the slides for a conclusion... 

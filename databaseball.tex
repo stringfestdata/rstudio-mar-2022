@@ -1,0 +1,695 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={DataBaseball},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{DataBaseball}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\hypertarget{on-deck-import-the-packages-well-need}{%
+\section{On deck: Import the packages we'll
+need}\label{on-deck-import-the-packages-well-need}}
+
+``There's a package for that!''
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(Lahman) }\CommentTok{\# Our source data}
+\FunctionTok{library}\NormalTok{(tidyverse)  }\CommentTok{\# "Metapackage," don\textquotesingle{}t leave home without it!}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
+\end{verbatim}
+
+\begin{verbatim}
+## v ggplot2 3.3.5     v purrr   0.3.4
+## v tibble  3.1.4     v dplyr   1.0.7
+## v tidyr   1.1.3     v stringr 1.4.0
+## v readr   2.0.1     v forcats 0.5.1
+\end{verbatim}
+
+\begin{verbatim}
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(psych)  }\CommentTok{\# Descriptive stats}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'psych'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:ggplot2':
+## 
+##     %+%, alpha
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(skimr)  }\CommentTok{\# Data profiling}
+\FunctionTok{library}\NormalTok{(writexl) }\CommentTok{\# Write to Excel {-}{-} data dump}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'writexl' was built under R version 4.1.2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(openxlsx) }\CommentTok{\# Write to Excel {-}{-} plus }
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{st-base-import-the-data}{%
+\section{1st base: Import the data}\label{st-base-import-the-data}}
+
+We can pull this data from the \texttt{Teams} and \texttt{Salary} tables
+of \texttt{Lahman}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(Teams)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   yearID lgID teamID franchID divID Rank  G Ghome  W  L DivWin WCWin LgWin
+## 1   1871   NA    BS1      BNA  <NA>    3 31    NA 20 10   <NA>  <NA>     N
+## 2   1871   NA    CH1      CNA  <NA>    2 28    NA 19  9   <NA>  <NA>     N
+## 3   1871   NA    CL1      CFC  <NA>    8 29    NA 10 19   <NA>  <NA>     N
+## 4   1871   NA    FW1      KEK  <NA>    7 19    NA  7 12   <NA>  <NA>     N
+## 5   1871   NA    NY2      NNA  <NA>    5 33    NA 16 17   <NA>  <NA>     N
+## 6   1871   NA    PH1      PNA  <NA>    1 28    NA 21  7   <NA>  <NA>     Y
+##   WSWin   R   AB   H X2B X3B HR BB SO SB CS HBP SF  RA  ER  ERA CG SHO SV
+## 1  <NA> 401 1372 426  70  37  3 60 19 73 16  NA NA 303 109 3.55 22   1  3
+## 2  <NA> 302 1196 323  52  21 10 60 22 69 21  NA NA 241  77 2.76 25   0  1
+## 3  <NA> 249 1186 328  35  40  7 26 25 18  8  NA NA 341 116 4.11 23   0  0
+## 4  <NA> 137  746 178  19   8  2 33  9 16  4  NA NA 243  97 5.17 19   1  0
+## 5  <NA> 302 1404 403  43  21  1 33 15 46 15  NA NA 313 121 3.72 32   1  0
+## 6  <NA> 376 1281 410  66  27  9 46 23 56 12  NA NA 266 137 4.95 27   0  0
+##   IPouts  HA HRA BBA SOA   E DP    FP                    name
+## 1    828 367   2  42  23 243 24 0.834    Boston Red Stockings
+## 2    753 308   6  28  22 229 16 0.829 Chicago White Stockings
+## 3    762 346  13  53  34 234 15 0.818  Cleveland Forest Citys
+## 4    507 261   5  21  17 163  8 0.803    Fort Wayne Kekiongas
+## 5    879 373   7  42  22 235 14 0.840        New York Mutuals
+## 6    747 329   3  53  16 194 13 0.845  Philadelphia Athletics
+##                           park attendance BPF PPF teamIDBR teamIDlahman45
+## 1          South End Grounds I         NA 103  98      BOS            BS1
+## 2      Union Base-Ball Grounds         NA 104 102      CHI            CH1
+## 3 National Association Grounds         NA  96 100      CLE            CL1
+## 4               Hamilton Field         NA 101 107      KEK            FW1
+## 5     Union Grounds (Brooklyn)         NA  90  88      NYU            NY2
+## 6     Jefferson Street Grounds         NA 102  98      ATH            PH1
+##   teamIDretro
+## 1         BS1
+## 2         CH1
+## 3         CL1
+## 4         FW1
+## 5         NY2
+## 6         PH1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(Salaries)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   yearID teamID lgID  playerID salary
+## 1   1985    ATL   NL barkele01 870000
+## 2   1985    ATL   NL bedrost01 550000
+## 3   1985    ATL   NL benedbr01 545000
+## 4   1985    ATL   NL  campri01 633333
+## 5   1985    ATL   NL ceronri01 625000
+## 6   1985    ATL   NL chambch01 800000
+\end{verbatim}
+
+Drop some of these Teams columns
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{teams }\OtherTok{\textless{}{-}}\NormalTok{ Teams }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(yearID, teamID, name, attendance, W)}
+
+\FunctionTok{head}\NormalTok{(teams)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   yearID teamID                    name attendance  W
+## 1   1871    BS1    Boston Red Stockings         NA 20
+## 2   1871    CH1 Chicago White Stockings         NA 19
+## 3   1871    CL1  Cleveland Forest Citys         NA 10
+## 4   1871    FW1    Fort Wayne Kekiongas         NA  7
+## 5   1871    NY2        New York Mutuals         NA 16
+## 6   1871    PH1  Philadelphia Athletics         NA 21
+\end{verbatim}
+
+We would like to pull the payroll data from \texttt{Salaries} and merge
+it to the data in \texttt{Teams}.
+
+\texttt{Salaries} is at the \emph{player} level so we will
+\emph{aggregate} it, then merge. \emph{Think \texttt{VLOOKUP()}!}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Get the total annual salaries by team}
+\NormalTok{payroll }\OtherTok{\textless{}{-}}\NormalTok{ Salaries }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(yearID, teamID) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{payroll =} \FunctionTok{sum}\NormalTok{(salary))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'yearID'. You can override using the `.groups` argument.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(payroll)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 3
+## # Groups:   yearID [1]
+##   yearID teamID  payroll
+##    <int> <fct>     <int>
+## 1   1985 ATL    14807000
+## 2   1985 BAL    11560712
+## 3   1985 BOS    10897560
+## 4   1985 CAL    14427894
+## 5   1985 CHA     9846178
+## 6   1985 CHN    12702917
+\end{verbatim}
+
+Now let's merge this into our \texttt{Teams} table:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{min}\NormalTok{(Teams}\SpecialCharTok{$}\NormalTok{yearID)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1871
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{min}\NormalTok{(payroll}\SpecialCharTok{$}\NormalTok{yearID)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1985
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Drop the years that don\textquotesingle{}t have payroll data}
+\NormalTok{teams\_merged }\OtherTok{\textless{}{-}}\NormalTok{ teams }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{inner\_join}\NormalTok{(payroll)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Joining, by = c("yearID", "teamID")
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(teams\_merged)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   yearID teamID              name attendance  W  payroll
+## 1   1985    ATL    Atlanta Braves    1350137 66 14807000
+## 2   1985    BAL Baltimore Orioles    2132387 83 11560712
+## 3   1985    BOS    Boston Red Sox    1786633 81 10897560
+## 4   1985    CAL California Angels    2567427 90 14427894
+## 5   1985    CHA Chicago White Sox    1669888 85  9846178
+## 6   1985    CHN      Chicago Cubs    2161534 77 12702917
+\end{verbatim}
+
+Sanity check -- does the total payroll equal sum of salaries?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sum}\NormalTok{(teams\_merged}\SpecialCharTok{$}\NormalTok{payroll) }\SpecialCharTok{==} \FunctionTok{sum}\NormalTok{(Salaries}\SpecialCharTok{$}\NormalTok{salary)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\hypertarget{nd-base-profile-the-data}{%
+\section{2nd base: Profile the data}\label{nd-base-profile-the-data}}
+
+Lots of ways to profile the data\ldots{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Shape}
+\FunctionTok{dim}\NormalTok{(teams\_merged)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 918   6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Summary statistics}
+\FunctionTok{summary}\NormalTok{(teams\_merged)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      yearID         teamID        name             attendance     
+##  Min.   :1985   ATL    : 32   Length:918         Min.   : 642745  
+##  1st Qu.:1993   BAL    : 32   Class :character   1st Qu.:1757932  
+##  Median :2001   BOS    : 32   Mode  :character   Median :2247078  
+##  Mean   :2001   CHA    : 32                      Mean   :2296063  
+##  3rd Qu.:2009   CHN    : 32                      3rd Qu.:2813151  
+##  Max.   :2016   CIN    : 32                      Max.   :4483350  
+##                 (Other):726                                       
+##        W             payroll         
+##  Min.   : 43.00   Min.   :   880000  
+##  1st Qu.: 71.25   1st Qu.: 25435708  
+##  Median : 80.00   Median : 50537324  
+##  Mean   : 79.94   Mean   : 60042633  
+##  3rd Qu.: 89.00   3rd Qu.: 84416083  
+##  Max.   :116.00   Max.   :231978886  
+## 
+\end{verbatim}
+
+Many packages exist to aid in the exploration:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{skim}\NormalTok{(teams\_merged)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}ll@{}}
+\caption{Data summary}\tabularnewline
+\toprule
+& \\
+\midrule
+\endfirsthead
+\toprule
+& \\
+\midrule
+\endhead
+Name & teams\_merged \\
+Number of rows & 918 \\
+Number of columns & 6 \\
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ & \\
+Column type frequency: & \\
+character & 1 \\
+factor & 1 \\
+numeric & 4 \\
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ & \\
+Group variables & None \\
+\bottomrule
+\end{longtable}
+
+\textbf{Variable type: character}
+
+\begin{longtable}[]{@{}lrrrrrrr@{}}
+\toprule
+skim\_variable & n\_missing & complete\_rate & min & max & empty &
+n\_unique & whitespace \\
+\midrule
+\endhead
+name & 0 & 1 & 12 & 29 & 0 & 35 & 0 \\
+\bottomrule
+\end{longtable}
+
+\textbf{Variable type: factor}
+
+\begin{longtable}[]{@{}lrrlrl@{}}
+\toprule
+skim\_variable & n\_missing & complete\_rate & ordered & n\_unique &
+top\_counts \\
+\midrule
+\endhead
+teamID & 0 & 1 & FALSE & 35 & ATL: 32, BAL: 32, BOS: 32, CHA: 32 \\
+\bottomrule
+\end{longtable}
+
+\textbf{Variable type: numeric}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.09}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.07}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.09}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.08}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.08}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.05}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.08}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.06}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.06}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.27}}@{}}
+\toprule
+skim\_variable & n\_missing & complete\_rate & mean & sd & p0 & p25 &
+p50 & p75 & p100 & hist \\
+\midrule
+\endhead
+yearID & 0 & 1 & 2000.98 & 9.14 & 1985 & 1993.00 & 2001 & 2009 & 2016 &
+▇▆▇▇▇ \\
+attendance & 0 & 1 & 2296062.86 & 718527.30 & 642745 & 1757931.75 &
+2247079 & 2813151 & 4483350 & ▂▇▇▃▁ \\
+W & 0 & 1 & 79.94 & 11.84 & 43 & 71.25 & 80 & 89 & 116 & ▁▅▇▆▁ \\
+payroll & 0 & 1 & 60042632.63 & 43309923.78 & 880000 & 25435708.25 &
+50537324 & 84416083 & 231978886 & ▇▆▂▁▁ \\
+\bottomrule
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{describe}\NormalTok{(teams\_merged)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            vars   n        mean          sd   median     trimmed         mad
+## yearID        1 918     2000.98        9.14     2001     2001.06       11.86
+## teamID*       2 918       73.77       40.08       78       75.12       48.93
+## name*         3 918       18.04        9.69       19       18.00       11.86
+## attendance    4 918  2296062.86   718527.30  2247079  2278384.52   764643.54
+## W             5 918       79.94       11.84       80       80.23       13.34
+## payroll       6 918 60042632.63 43309923.78 50537324 54783534.67 42649322.61
+##               min       max     range  skew kurtosis         se
+## yearID       1985      2016        31 -0.07    -1.17       0.30
+## teamID*         2       137       135 -0.20    -1.08       1.32
+## name*           1        35        34 -0.01    -1.22       0.32
+## attendance 642745   4483350   3840605  0.24    -0.52   23714.93
+## W              43       116        73 -0.20    -0.34       0.39
+## payroll    880000 231978886 231098886  1.17     1.49 1429440.49
+\end{verbatim}
+
+\hypertarget{shortstop-data-visualization}{%
+\subsection{Shortstop: Data
+visualization?}\label{shortstop-data-visualization}}
+
+This is an easy step to overlook, but it is \emph{crucial}! It leads
+very well into modeling.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Distribution of payrolls}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ teams\_merged, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ payroll)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\includegraphics{databaseball_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# What could be causing this?}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Distribution of wins}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ teams\_merged, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ W)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\includegraphics{databaseball_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+\hypertarget{rd-base-analyze-the-data}{%
+\section{3rd base: Analyze the data}\label{rd-base-analyze-the-data}}
+
+Depending how statistically informed you want to get, R can ``probably''
+handle it! Let's see what our payroll report might have in store\ldots{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Relationship between payroll and attendance}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ teams\_merged, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ payroll, }\AttributeTok{y =}\NormalTok{ attendance)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{databaseball_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Relationship between payroll and wins}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ teams\_merged, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ payroll, }\AttributeTok{y =}\NormalTok{ W)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{databaseball_files/figure-latex/unnamed-chunk-13-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# What if we take the log of payrolls?}
+\NormalTok{teams\_merged}\SpecialCharTok{$}\NormalTok{log\_payroll }\OtherTok{\textless{}{-}} \FunctionTok{log}\NormalTok{(teams\_merged}\SpecialCharTok{$}\NormalTok{payroll)}
+\FunctionTok{head}\NormalTok{(teams\_merged)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   yearID teamID              name attendance  W  payroll log_payroll
+## 1   1985    ATL    Atlanta Braves    1350137 66 14807000    16.51061
+## 2   1985    BAL Baltimore Orioles    2132387 83 11560712    16.26312
+## 3   1985    BOS    Boston Red Sox    1786633 81 10897560    16.20405
+## 4   1985    CAL California Angels    2567427 90 14427894    16.48467
+## 5   1985    CHA Chicago White Sox    1669888 85  9846178    16.10259
+## 6   1985    CHN      Chicago Cubs    2161534 77 12702917    16.35734
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Relationship between payroll and attendance}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ teams\_merged, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ log\_payroll, }\AttributeTok{y =}\NormalTok{ attendance)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{\textquotesingle{}lm\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula 'y ~ x'
+\end{verbatim}
+
+\includegraphics{databaseball_files/figure-latex/unnamed-chunk-15-1.pdf}
+
+\hypertarget{home-export-to-excel}{%
+\section{Home: Export to Excel}\label{home-export-to-excel}}
+
+There's definitely more that could be done with our payroll/attendnance
+analysis, but let's take our victory lap now :)
+
+\hypertarget{option-a-writexl}{%
+\subsection{\texorpdfstring{Option A:
+\texttt{writexl}}{Option A: writexl}}\label{option-a-writexl}}
+
+If you want a pure data dump to Excel, \texttt{writexl} is a good
+option:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# What do you want to write, and to where?}
+\FunctionTok{write\_xlsx}\NormalTok{(teams\_merged, }\StringTok{\textquotesingle{}output/writexl.xlsx\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# What can this function do and not?}
+\CommentTok{\# Awesome Easter Egg}
+\NormalTok{?write\_xlsx}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## starting httpd help server ... done
+\end{verbatim}
+
+If you would like to fully automate the production from R,
+\texttt{openxlsx} is a good option:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Add workbook}
+\NormalTok{wb }\OtherTok{\textless{}{-}} \FunctionTok{createWorkbook}\NormalTok{()}
+
+\CommentTok{\# Add worksheet of raw data}
+\NormalTok{data\_sheet }\OtherTok{\textless{}{-}} \FunctionTok{addWorksheet}\NormalTok{(wb, }\AttributeTok{sheetName =} \StringTok{\textquotesingle{}data\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Write the dataset as a Table to Excel}
+\FunctionTok{writeDataTable}\NormalTok{(wb, }\AttributeTok{sheet =}\NormalTok{ data\_sheet, }\AttributeTok{x =}\NormalTok{ teams\_merged, }\AttributeTok{rowNames =} \ConstantTok{FALSE}\NormalTok{)}
+
+
+\CommentTok{\# Send plot to the workbook}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ teams\_merged, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ payroll, }\AttributeTok{y =}\NormalTok{ attendance)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{\textquotesingle{}Payroll vs attendance\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{databaseball_files/figure-latex/unnamed-chunk-18-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Add the image to the worksheet, set the placement}
+\FunctionTok{insertPlot}\NormalTok{(wb, }\AttributeTok{sheet =}\NormalTok{ data\_sheet, }\AttributeTok{startRow =} \DecValTok{1}\NormalTok{, }\AttributeTok{startCol =} \StringTok{"I"}\NormalTok{, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{)}
+
+\NormalTok{file }\OtherTok{=} \StringTok{\textquotesingle{}output/openxlsx.xlsx\textquotesingle{}}
+
+\CommentTok{\# save workbook to working directory}
+\FunctionTok{saveWorkbook}\NormalTok{(}\AttributeTok{wb =}\NormalTok{ wb, }\AttributeTok{file =}\NormalTok{ file, }\AttributeTok{overwrite =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+We could even add cell formats, conditional formatting and so forth to
+Excel from R using this package. \textbf{Home run!}
+
+Back to the slides for a conclusion\ldots{}
+
+\end{document}

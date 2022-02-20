@@ -14,7 +14,7 @@ library(GGally)
 “I want to make a scatterplot for every pair of variables”
 
 
-```{r echo=FALSE, message=FALSE, results='hide'}
+```{r message=FALSE}
 mpg %>% 
   select_if(is.numeric) %>% 
   ggpairs()
