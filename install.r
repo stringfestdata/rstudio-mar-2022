@@ -5,3 +5,4 @@ install.packages('skimr')  # Data profiling
 install.packages('writexl') # Write to Excel # data dump
 install.packages('openxlsx') # Write to Excel # plus
 # https://github.com/jupyterhub/repo2docker/issues/237
+writeLines("R_LIBS_USER=/srv/rlibs", "~/.Renviron"
