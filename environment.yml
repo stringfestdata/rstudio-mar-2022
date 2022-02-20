@@ -1,0 +1,6 @@
+channels:
+  - conda-forge
+dependencies:
+  - r-base
+  - r-tidyverse
+  - r-openxlsx
